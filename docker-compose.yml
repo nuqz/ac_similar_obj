@@ -1,0 +1,15 @@
+version: '3'
+services:
+  tfjupyter:
+    build: .
+    ports:
+      - 8888:8888
+    volumes:
+      - ./src:/tf/ac_similar_obj
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: 1
+              capabilities: [ gpu ]
