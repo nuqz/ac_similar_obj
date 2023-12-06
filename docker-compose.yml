@@ -6,6 +6,7 @@ services:
       - 8888:8888
     volumes:
       - ./src:/tf/ac_similar_obj
+      - ./dataset:/tf/ac_similar_obj_ds
     deploy:
       resources:
         reservations:
