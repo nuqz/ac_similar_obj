@@ -4,4 +4,4 @@ dataset/*
 
 src/.ipynb_checkpoints
 src/.Trash-*
-*/__pycache__
+**/__pycache__
