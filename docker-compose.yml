@@ -5,6 +5,8 @@ services:
     ports:
       - 8888:8888
     volumes:
+      - ./ipython:/home/jupyter/.ipython
+      - ./jupyter:/home/jupyter/.jupyter
       - ./src:/tf/ac_similar_obj
       - ./dataset:/tf/ac_similar_obj_ds
     deploy:
