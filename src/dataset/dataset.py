@@ -28,8 +28,8 @@ _random_to_grayscale = random_to_grayscale()
 _random_inverse = random_inverse()
 _random_channel_remove = random_channel_remove()
 
-# .map(lambda image, label: _random_flip(image, label))
-# .map(_random_to_grayscale)
-# .map(_random_inverse)
 augmented_ds = triple_ds \
-    .map(_random_channel_remove)
+    .map(lambda image, label: _random_flip(image, label)) \
+    .map(_random_channel_remove) \
+    .map(_random_inverse) \
+    .map(_random_to_grayscale)
