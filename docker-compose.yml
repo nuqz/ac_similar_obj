@@ -4,11 +4,13 @@ services:
     build: .
     ports:
       - 8888:8888
+      - 6006:6006
     volumes:
       - ./ipython:/home/jupyter/.ipython
       - ./jupyter:/home/jupyter/.jupyter
       - ./src:/tf/ac_similar_obj
       - ./dataset:/tf/ac_similar_obj_ds
+      - ./tensorboard:/tf/board/logs
     deploy:
       resources:
         reservations:
