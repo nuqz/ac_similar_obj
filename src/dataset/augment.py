@@ -76,3 +76,35 @@ def random_channel_remove(factor=0.75):
         return image, label
 
     return _channel_remove
+
+
+def random_brightness(max_delta=0.25):
+    def _brightness(image, label):
+        image = tf.image.random_brightness(image, max_delta)
+        return image, label
+
+    return _brightness
+
+
+def random_contrast(lower=0.25, upper=1.75):
+    def _contrast(image, label):
+        image = tf.image.random_contrast(image, lower, upper)
+        return image, label
+
+    return _contrast
+
+
+def random_hue(max_delta=0.25):
+    def _hue(image, label):
+        image = tf.image.random_hue(image, max_delta)
+        return image, label
+
+    return _hue
+
+
+def random_saturation(lower=0.25, upper=1.75):
+    def _saturation(image, label):
+        image = tf.image.random_saturation(image, lower, upper)
+        return image, label
+
+    return _saturation

@@ -11,7 +11,7 @@ from dataset.dataset import loaded_and_decoded_ds, without_bg_ds, without_bg_and
 # ----- horizontally ✔️
 # ----- vertically ✔️
 # ----- both ✔️
-# --- color
+# --- color ✔️
 # ----- grayscale ✔️
 # ----- inverse color ✔️
 # ----- remove random channel ✔️
@@ -20,10 +20,10 @@ from dataset.dataset import loaded_and_decoded_ds, without_bg_ds, without_bg_and
 # ----- blur
 # ----- grid mask
 # --- distortions
-# ----- brightness
-# ----- saturation
-# ----- contrast
-# ----- hue
+# ----- brightness ✔️
+# ----- saturation ✔️
+# ----- contrast ✔️
+# ----- hue ✔️
 # ----- rotation
 # ----- sharpening
 # --- smart translations (depending on labels)
