@@ -102,8 +102,6 @@ def random_saturation(lower=0.25, upper=1.75):
 
 def random_noise(factor=0.5, amp=32):
     def _noise(image, label):
-        print('b', image.shape)
-        print('n', tf.shape(image))
         if tf.random.uniform([]) < factor:
             shape = tf.shape(image)
             noise = tf.random.uniform(shape, 0, amp, dtype=tf.int32)
