@@ -32,4 +32,4 @@ augmented_ds = triple_ds.repeat(2) \
     .map(random_blur(), num_parallel_calls=tf.data.AUTOTUNE) \
     .map(random_noise(0.5), num_parallel_calls=tf.data.AUTOTUNE) \
     .map(lambda image, label: (image, tf.reshape(label, [-1])), num_parallel_calls=tf.data.AUTOTUNE) \
-    .map(restore_shape) \
+    .map(restore_shape)
