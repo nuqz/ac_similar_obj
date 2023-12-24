@@ -18,7 +18,7 @@ def load_label(image_file_path):
     label_lines = tf.strings.split(label_raw_str, '\n')[:-1]
     label_numbers_str = tf.strings.split(label_lines, ',')
     label_rag = tf.strings.to_number(label_numbers_str, tf.float32)
-    return tf.reshape(label_rag, [2, -1])
+    return tf.reshape(label_rag, [2, 2])
 
 
 def load(image_file_path):
