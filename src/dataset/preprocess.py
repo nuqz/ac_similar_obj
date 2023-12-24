@@ -8,9 +8,6 @@ RESCALE_FACTOR = 1./255
 W, H = int(RESIZE_FACTOR * ORIG_W), int(RESIZE_FACTOR * ORIG_H)
 CROP_W, CROP_H = 30, 15
 
-normalization_layer = tf.keras.layers.Rescaling(RESCALE_FACTOR)
-resize_layer = tf.keras.layers.Resizing(W, H)
-cropping_layer = tf.keras.layers.Cropping2D((CROP_H, CROP_W))
 
 
 def drop_alpha_channel(decoded_image, label):
@@ -18,23 +15,6 @@ def drop_alpha_channel(decoded_image, label):
 
 
 def normalize_image(image, label):
-    return (normalization_layer(image), label)
-
-
-def resize_image(image, label):
-    return (resize_layer(image), label)
-
-
-def crop_image(image, label):
-    i = tf.expand_dims(image, 0)
-    i = cropping_layer(i)
-    i = tf.squeeze(i, 0)
-
-    # TODO: adjust labels too after cropping
-
-    return (i, label)
-
-
 def _remove_background(img, threshold=228):
     gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
 
