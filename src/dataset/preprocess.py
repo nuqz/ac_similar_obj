@@ -2,12 +2,7 @@ import cv2
 import numpy as np
 import tensorflow as tf
 
-ORIG_W, ORIG_H = 552, 344
-RESIZE_FACTOR = 0.5
-RESCALE_FACTOR = 1./255
-W, H = int(RESIZE_FACTOR * ORIG_W), int(RESIZE_FACTOR * ORIG_H)
-CROP_W, CROP_H = 30, 15
-
+from dataset.constants import ORIG_W, ORIG_H
 
 
 def drop_alpha_channel(decoded_image, label):
