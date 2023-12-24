@@ -25,15 +25,6 @@ def random_flip(factor=0.5):
     return _flip
 
 
-def random_to_grayscale(factor=0.25):
-    def _to_grayscale(image, label):
-        if tf.random.uniform([]) < factor:
-            image = tf.image.rgb_to_grayscale(image)
-        return image, label
-
-    return _to_grayscale
-
-
 def random_inverse(factor=0.25):
     def _inverse(image, label):
         if tf.random.uniform([]) < factor:
