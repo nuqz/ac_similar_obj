@@ -14,8 +14,12 @@ def drop_alpha_channel(decoded_image, label):
     return (decoded_image[:, :, :3], label)
 
 
-def normalize_image(image, label):
+@tf.py_function(Tout=tf.uint8)
 def _remove_background(img, threshold=228):
+    img = img.numpy()
+    if not isinstance(threshold, int):
+        threshold = threshold.numpy()
+
     gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
 
     _, baseline = cv2.threshold(gray, threshold, 255, cv2.THRESH_TRUNC)
@@ -38,7 +42,9 @@ lower_gray = np.array([0, 0, 0])
 upper_gray = np.array([255, 20, 255])
 
 
+@tf.py_function(Tout=tf.uint8)
 def _remove_shadows(img):
+    img = img.numpy()
     original = img.copy()
     hsv = cv2.cvtColor(img, cv2.COLOR_BGR2HSV)
     mask = cv2.inRange(hsv, lower_gray, upper_gray)
@@ -47,11 +53,9 @@ def _remove_shadows(img):
     return result
 
 
-@tf.py_function(Tout=(tf.uint8, tf.float32))
 def remove_background(image, label):
-    return _remove_background(image.numpy(), 235), label
+    return _remove_background(image, 235), label
 
 
-@tf.py_function(Tout=(tf.uint8, tf.float32))
 def remove_shadows(image, label):
-    return _remove_shadows(image.numpy()), label
+    return _remove_shadows(image), label
