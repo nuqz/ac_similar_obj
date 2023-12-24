@@ -1,26 +1,24 @@
 import tensorflow as tf
 import tensorflow_probability as tfp
 
-# TODO: subtract_from_one_column
+
+def subtract_from_one_column(x, col_index):
+    num_cols = x.shape[-1]
+    cols = tf.split(x,  num_or_size_splits=num_cols, axis=-1)
+    cols[col_index] = 1 - cols[col_index]
+    upd = tf.concat(cols, axis=-1)
+    return upd
 
 
 def random_flip(factor=0.5):
     def _flip(image, label):
         if tf.random.uniform([]) < factor:
             image = tf.image.flip_left_right(image)
-            label = tf.tensor_scatter_nd_update(
-                label,
-                [[0, 0], [1, 0]],
-                tf.squeeze(1 - tf.slice(label, [0, 0], [2, 1]))
-            )
+            label = subtract_from_one_column(label, 0)
 
         if tf.random.uniform([]) < factor:
             image = tf.image.flip_up_down(image)
-            label = tf.tensor_scatter_nd_update(
-                label,
-                [[0, 1], [1, 1]],
-                tf.squeeze(1 - tf.slice(label, [0, 1], [2, 1]))
-            )
+            label = subtract_from_one_column(label, 1)
 
         return image, label
 
