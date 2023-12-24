@@ -2,6 +2,7 @@ version: '3'
 services:
   tfjupyter:
     build: .
+    privileged: true
     ports:
       - 8888:8888
       - 6006:6006
