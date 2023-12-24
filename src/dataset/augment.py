@@ -108,3 +108,18 @@ def random_saturation(lower=0.25, upper=1.75):
         return image, label
 
     return _saturation
+
+
+def random_noise(factor=0.5, amp=32):
+    def _noise(image, label):
+        print('b', image.shape)
+        print('n', tf.shape(image))
+        if tf.random.uniform([]) < factor:
+            shape = tf.shape(image)
+            noise = tf.random.uniform(shape, 0, amp, dtype=tf.int32)
+            noise = tf.cast(noise, tf.uint8)
+            image = tf.clip_by_value(
+                image + noise, clip_value_min=0, clip_value_max=255)
+        return image, label
+
+    return _noise
