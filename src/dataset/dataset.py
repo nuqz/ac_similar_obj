@@ -1,7 +1,3 @@
-import os
-import pathlib
-
-import cv2
 import tensorflow as tf
 
 from dataset.load import challenges_pattern, load, decode_image
