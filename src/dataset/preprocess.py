@@ -54,3 +54,9 @@ def remove_background(image, label):
 
 def remove_shadows(image, label):
     return _remove_shadows(image), label
+
+
+def restore_shape(image, label):
+    image.set_shape([ORIG_H, ORIG_W, 3])
+    print(image.shape)
+    return image, label
