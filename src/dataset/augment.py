@@ -1,4 +1,5 @@
 import tensorflow as tf
+import tensorflow_probability as tfp
 
 # TODO: subtract_from_one_column
 
@@ -123,3 +124,27 @@ def random_noise(factor=0.5, amp=32):
         return image, label
 
     return _noise
+
+
+def new_gaussian_kernel_2d(size, mean, std):
+    d = tfp.distributions.Normal(mean, std)
+    vals = d.prob(tf.range(-size, size+1, dtype=tf.float32))
+    kernel = tf.einsum('i,j->ij', vals, vals)
+    return kernel / tf.reduce_sum(kernel)
+
+
+def random_blur(factor=0.5, kernel_size=5, sigma=2):
+    def _blur(image, label):
+        if tf.random.uniform([]) < factor:
+            kernel = new_gaussian_kernel_2d(kernel_size, 0, sigma)
+            kernel = kernel[:, :, tf.newaxis, tf.newaxis]
+            kernel = tf.tile(kernel, [1, 1, 3, 1])
+
+            image = tf.cast(image[tf.newaxis, :, :, :], dtype=tf.float32)
+            image = tf.nn.depthwise_conv2d(
+                image, kernel, strides=[1, 1, 1, 1], padding='SAME')
+            image = tf.squeeze(tf.cast(image, dtype=tf.uint8))
+
+        return image, label
+
+    return _blur
