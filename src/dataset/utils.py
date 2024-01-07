@@ -1,5 +1,6 @@
 import tensorflow as tf
 
+from dataset.constants import ORIG_H, ORIG_W
 from config import dataset_log_dir
 
 
@@ -47,3 +48,7 @@ def draw_label(image, label, block_size=3):
     )
 
     return mask
+
+
+def dummy_image(n_batches=1):
+    return tf.ones([n_batches, ORIG_H, ORIG_W, 3])
